@@ -1,0 +1,25 @@
+.dataContainer {
+    text-align: center;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.dataContainer td, .dataContainer .head {
+    border: 1px solid #ddd;
+    padding: 8px;
+    max-width: 200px;
+}
+
+.dataContainer tr:hover {
+    background-color: #ddd;
+}
+
+.dataContainer .head {
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: center;
+background-color: #4CAF50;
+color: white;
+}

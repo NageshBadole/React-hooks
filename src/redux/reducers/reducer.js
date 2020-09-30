@@ -1,88 +1,48 @@
-import Tasks from "../../tasks";
-
+import { GET_TOKEN, FETCH_DATA, CLOSE_MODAL, SUBMIT_MODAL, INPUT_CHANGE } from "../actions/types";
 
 const initialState = {
-    tasks : [
-        { 
-            text: "Task 1",
-            isCompleted : false      
-        },
-        {
-            text: "Second Task" ,
-            isCompleted : false
-        },
-        {
-            text: "One more task",
-            isCompleted : false
-        },
-    ],
-    isOpen : false,
-    isEditing : false,
-    currentIndex : 0,
-}
- 
-function reducer (state = initialState, action){
+  showModal : true,
+};
 
-    switch (action.type) {
+export default function (state = initialState, action) {
+  const { type, payload } = action;
 
-        case "ADDTASK": 
-            const newTask = {
-                text : action.payload.text,
-                isCompleted : action.payload.isCompleted
-            }
-            state.isOpen = false
-            return  {
-                ...state,
-                tasks : [...state.tasks , newTask]
-            }
+  switch (type) {
+    case GET_TOKEN :
+        console.log("::",payload)
+        return {
+          ...state,
+          showModal : false,
+          AuthKey : payload.data.access_token
+        };
 
-        case "TASKSTATUS":
-            const index = action.payload;
-            state.tasks[index].isCompleted = true;
-            return {
-                ...state
-            }
-
-        case "REMOVETASK":
-            const newTasks = state.tasks;
-            newTasks.splice(action.payload, 1)
-            return {
-                ...state,
-                tasks : [...newTasks]
-            }
-
-        case "OPEN_MODAL" :
-            state.isOpen = true;
-            return {
-                ...state,
-            }
-
-        case "CLOSE_MODAL" :
-            state.isOpen = false;
-            return {
-                ...state,
-            }
+    case FETCH_DATA :
+        console.log("::",payload)
+        return {
+          ...state,
+          data : payload 
+        };
         
-        case "EDIT_TASK" :
-            state.isEditing = true;
-            state.isOpen = true;
-            state.currentIndex = action.payload;
-            return {
-                ...state,
-            }
+    case CLOSE_MODAL :
+      return {
+        ...state,
+        showModal : false 
+      };
 
-        case "SAVE_EDIT" : 
-            state.isEditing = false;
-            state.isOpen = false;
-            const editedTask = action.payload.text;
-            state.tasks[state.currentIndex].text = editedTask;
-            return {
-                ...state,
-            }
+    case SUBMIT_MODAL :
+      console.log(';;;',payload)
+      return {
+        ...state,
+        showModal : false,
+      };
 
-        default:
-            return state;
-    }
+    case INPUT_CHANGE:
+      return {
+        ...state,
+        user_textChange: action.payload
+      }
+
+    default:
+      return state;
+  }
 }
- 
-export default reducer;
