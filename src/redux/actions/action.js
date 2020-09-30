@@ -1,6 +1,5 @@
 import * as ACTION_TYPES from "./types";
 import axios from "axios";
-import { config }from '../../util/helper'
 import qs from 'qs';
 import { useEffect } from "react";
 

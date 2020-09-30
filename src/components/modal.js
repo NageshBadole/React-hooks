@@ -5,9 +5,9 @@ import './CSS/modal.css'
 
 export default function Modal () {
 
-	const [username , setUserName] = useState();
-	const [password , setPassword] = useState();
-	const [clientID , setId] = useState();
+	const [username , setUserName] = useState('');
+	const [password , setPassword] = useState('');
+	const [clientID , setId] = useState('');
 	const showModal = useSelector(state => state.showModal);
 	const dispatch = useDispatch();
 
